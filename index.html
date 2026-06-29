@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Finanzamt – Native iOS &amp; macOS App zur EÜR-Vorbereitung, Belegverwaltung, Fahrtbuch und Steuerexport.">
     <meta name="theme-color" content="#000000">
+    <link rel="icon" href="Finanzamt.png" type="image/png">
+    <link rel="apple-touch-icon" href="Finanzamt.png">
+    <meta property="og:title" content="Finanzamt – EÜR-Vorbereitung">
+    <meta property="og:description" content="Native iOS &amp; macOS App für Belege, Fahrtbuch und Steuerexport.">
+    <meta property="og:image" content="Finanzamt.png">
     <title>Finanzamt | EÜR-Vorbereitung · Belege · Fahrtbuch</title>
     <style>
         :root {
@@ -195,13 +200,10 @@
             width: 76px;
             height: 76px;
             border-radius: 18px;
-            background: linear-gradient(145deg, #0d2818, #1a3d28);
-            border: 1px solid var(--green-border);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
+            object-fit: cover;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--green-border);
+            flex-shrink: 0;
         }
 
         .app-icon-row h2 {
@@ -410,7 +412,7 @@
 
     <div class="wrap">
         <nav>
-            <a class="back-link" href="https://glassydev-home.github.io/portfolio/">← Portfolio</a>
+            <a class="back-link" href="https://github.com/GlassyDev-home" target="_blank" rel="noopener">← GitHub</a>
             <div class="nav-tags">
                 <span class="tag platform">iOS</span>
                 <span class="tag platform">macOS</span>
@@ -429,14 +431,14 @@
                     die ihre Unterlagen strukturiert fürs Finanzamt vorbereiten möchten.
                 </p>
                 <div class="cta-row">
-                    <a class="btn btn-primary" href="https://glassydev-home.github.io/portfolio/">Zum Portfolio</a>
-                    <a class="btn btn-secondary" href="#features">Features ansehen</a>
+                    <a class="btn btn-primary" href="#features">Features ansehen</a>
+                    <a class="btn btn-secondary" href="https://github.com/GlassyDev-home" target="_blank" rel="noopener">GitHub</a>
                 </div>
             </div>
 
             <aside class="hero-card" aria-label="App-Überblick">
                 <div class="app-icon-row">
-                    <div class="app-icon" aria-hidden="true">📊</div>
+                    <img src="Finanzamt.png" alt="Finanzamt App Icon" class="app-icon" width="76" height="76">
                     <div>
                         <h2>Meine Steuererklärung</h2>
                         <p>Version für iOS &amp; macOS</p>
@@ -559,7 +561,7 @@
         </section>
 
         <footer>
-            <p>Entwickelt von <a href="https://glassydev-home.github.io/portfolio/">Dima</a> · Finanzamt · Native SwiftUI App</p>
+            <p>Entwickelt von <a href="https://github.com/GlassyDev-home" target="_blank" rel="noopener">GlassyDev</a> · Finanzamt · Native SwiftUI App</p>
             <p style="margin-top: 8px; font-size: 0.8rem;">Keine Steuerberatung — die App dient der Dokumentation und Export-Vorbereitung.</p>
         </footer>
     </div>
