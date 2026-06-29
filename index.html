@@ -1,3 +1,8 @@
+Hier ist deine vollständige, angepasste `index.html`.
+
+Ich habe das alte Raster (`.screenshot-grid` und `.screenshot-hero`) aus dem CSS entfernt und durch eine moderne, native `.screenshot-carousel`-Klasse ersetzt. So stehen die iPhones perfekt nebeneinander und rasten beim Scrollen/Wischen wie in einem echten iOS-App-Karussell sauber ein.
+
+```html
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -85,7 +90,7 @@
         .nav-tags {
             display: flex;
             gap: 8px;
-            margin-wrap: wrap;
+            flex-wrap: wrap;
         }
 
         .tag {
@@ -451,7 +456,16 @@
 
         footer a:hover { text-decoration: underline; }
 
-        /* Screenshots */
+        /* Screenshots - Neues Karussell Layout */
+        .screenshots-header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 8px;
+        }
+
         .theme-toggle {
             display: inline-flex;
             gap: 4px;
@@ -459,7 +473,6 @@
             border-radius: 12px;
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid var(--glass-border);
-            margin-bottom: 28px;
         }
 
         .theme-toggle button {
@@ -480,13 +493,24 @@
             border: 1px solid var(--green-border);
         }
 
-        .screenshot-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        .screenshot-carousel {
+            display: flex;
             gap: 24px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding: 20px 4px 40px 4px;
+            scrollbar-width: none; /* Blendet Scrollbalken in Firefox aus */
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Blendet Scrollbalken in Safari, Chrome & Edge aus */
+        .screenshot-carousel::-webkit-scrollbar {
+            display: none;
         }
 
         .screenshot-card {
+            flex: 0 0 260px; /* Jedes iPhone behält exakt seine Breite */
+            scroll-snap-align: start; /* Das aktive iPhone rastet beim Wischen perfekt ein */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -534,24 +558,6 @@
             font-weight: 600;
             color: var(--muted-2);
             text-align: center;
-        }
-
-        .screenshot-hero {
-            margin-bottom: 40px;
-        }
-
-        .screenshot-hero .phone-frame {
-            max-width: 300px;
-            margin: 0 auto;
-        }
-
-        .screenshots-header {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: flex-end;
-            justify-content: space-between;
-            gap: 16px;
-            margin-bottom: 8px;
         }
     </style>
 </head>
@@ -622,7 +628,7 @@
             <div class="screenshots-header">
                 <div>
                     <h2>App im Überblick</h2>
-                    <p class="section-lead" style="margin-bottom: 0;">Echte Screenshots aus BelegDepot — Dark Mode und Hell-Modus.</p>
+                    <p class="section-lead" style="margin-bottom: 0;">Wische durch die Screenshots — Dark Mode und Hell-Modus.</p>
                 </div>
                 <div class="theme-toggle" role="group" aria-label="Darstellung wählen">
                     <button type="button" class="active" data-theme="dark" aria-pressed="true">Dark</button>
@@ -630,7 +636,8 @@
                 </div>
             </div>
 
-            <div class="screenshot-hero">
+            <!-- Karussell-Container nebeneinander -->
+            <div class="screenshot-carousel">
                 <figure class="screenshot-card">
                     <div class="phone-frame">
                         <img
@@ -638,21 +645,20 @@
                             data-dark="hauptseite_dark.png"
                             data-hell="hauptseite_hell.png"
                             alt="BelegDepot Dashboard mit Jahresübersicht"
-                            width="300"
-                            height="650"
+                            width="260"
+                            height="563"
                             loading="eager"
                         >
                     </div>
-                    <figcaption>Dashboard · Jahresübersicht</figcaption>
+                    <figcaption>Dashboard</figcaption>
                 </figure>
-            </div>
 
-            <figure class="screenshot-card">
+                <figure class="screenshot-card">
                     <div class="phone-frame">
                         <img
-                            src="menue_dark.png?v=1"
-                            data-dark="menue_dark.png?v=1"
-                            data-hell="menue_hell.png?v=1"
+                            src="menue_dark.png"
+                            data-dark="menue_dark.png"
+                            data-hell="menue_hell.png"
                             alt="Hauptmenü mit Geschäftlich, Privat und Fahrtbuch"
                             width="260"
                             height="563"
@@ -854,3 +860,5 @@
     </script>
 </body>
 </html>
+
+```
