@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Finanzamt – Native iOS &amp; macOS App zur EÜR-Vorbereitung, Belegverwaltung, Fahrtbuch und Steuerexport.">
+    <meta name="description" content="BelegDepot – Intelligente Digitalisierung, OCR-Scan und Organisation von Steuerbelegen für das Finanzamt. Native iOS App mit SwiftUI &amp; SwiftData.">
     <meta name="theme-color" content="#000000">
     <link rel="icon" href="Finanzamt.png" type="image/png">
     <link rel="apple-touch-icon" href="Finanzamt.png">
-    <meta property="og:title" content="Finanzamt – EÜR-Vorbereitung">
-    <meta property="og:description" content="Native iOS &amp; macOS App für Belege, Fahrtbuch und Steuerexport.">
+    <meta property="og:title" content="BelegDepot – Steuerbelege digital">
+    <meta property="og:description" content="Scannen, OCR, kategorisieren und exportieren — vorbereitet fürs Finanzamt und den Steuerberater.">
     <meta property="og:image" content="Finanzamt.png">
-    <title>Finanzamt | EÜR-Vorbereitung · Belege · Fahrtbuch</title>
+    <title>BelegDepot | Steuerbelege scannen · sortieren · exportieren</title>
     <style>
         :root {
             --bg: #000000;
@@ -24,7 +24,7 @@
             --green-border: rgba(89, 255, 140, 0.28);
             --cyan: #5ac8fa;
             --radius: 28px;
-            --radius-sm: 16px;
+            --radius-sm: 18px;
         }
 
         * {
@@ -202,7 +202,7 @@
             border-radius: 18px;
             object-fit: cover;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-            border: 1px solid var(--green-border);
+            border: 1px solid var(--glass-border);
             flex-shrink: 0;
         }
 
@@ -225,7 +225,7 @@
 
         .stat {
             background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--glass-border);
             border-radius: var(--radius-sm);
             padding: 14px;
         }
@@ -269,6 +269,8 @@
 
         .feature {
             background: var(--glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
             border-radius: var(--radius);
             padding: 24px;
@@ -309,25 +311,24 @@
             font-size: 0.92rem;
         }
 
-        .tabs-preview {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
+        .category-pills {
+            display: flex;
+            flex-wrap: wrap;
             gap: 8px;
             margin-bottom: 20px;
         }
 
-        .tab-pill {
-            text-align: center;
-            padding: 10px 6px;
+        .pill {
+            padding: 8px 14px;
             border-radius: 12px;
-            font-size: 0.72rem;
+            font-size: 0.78rem;
             font-weight: 600;
             color: var(--muted);
             background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--glass-border);
         }
 
-        .tab-pill.active {
+        .pill.active {
             color: var(--green);
             background: var(--green-dim);
             border-color: var(--green-border);
@@ -375,6 +376,50 @@
             font-size: 0.88rem;
         }
 
+        .design-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius);
+            padding: 28px;
+            display: grid;
+            gap: 16px;
+        }
+
+        .design-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .design-row:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .design-row span:first-child {
+            color: var(--muted);
+            font-size: 0.88rem;
+        }
+
+        .design-row span:last-child {
+            font-weight: 600;
+            font-size: 0.92rem;
+            text-align: right;
+        }
+
+        .swatch {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border-radius: 4px;
+            vertical-align: middle;
+            margin-right: 6px;
+            border: 1px solid var(--glass-border);
+        }
+
         .tech-row {
             display: flex;
             flex-wrap: wrap;
@@ -388,13 +433,13 @@
             font-weight: 600;
             color: #e5e5ea;
             background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--glass-border);
         }
 
         footer {
             text-align: center;
             padding-top: 32px;
-            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            border-top: 1px solid var(--glass-border);
             color: var(--muted);
             font-size: 0.88rem;
         }
@@ -412,10 +457,10 @@
 
     <div class="wrap">
         <nav>
-            <a class="back-link" href="https://github.com/GlassyDev-home" target="_blank" rel="noopener">← GitHub</a>
+            <a class="back-link" href="https://glassydev-home.github.io/portfolio/">← Portfolio</a>
             <div class="nav-tags">
                 <span class="tag platform">iOS</span>
-                <span class="tag platform">macOS</span>
+                <span class="tag">Swift 6</span>
                 <span class="tag">SwiftUI</span>
                 <span class="tag">SwiftData</span>
             </div>
@@ -423,146 +468,162 @@
 
         <header class="hero">
             <div class="hero-copy">
-                <h1>Finanzamt</h1>
-                <p class="subtitle">EÜR-Vorbereitung, Belege und Fahrtbuch — native App für Geschäftliches und Privates.</p>
+                <h1>BelegDepot</h1>
+                <p class="subtitle">Intelligente Digitalisierung und Vorbereitung von Steuerbelegen fürs Finanzamt.</p>
                 <p class="intro">
-                    Finanzamt hilft dir, Einnahmen, Ausgaben, Belege und Fahrten für die Steuer zu erfassen
-                    und als PDF oder CSV zu exportieren. Ideal für App-Store-Entwickler, Freelancer und alle,
-                    die ihre Unterlagen strukturiert fürs Finanzamt vorbereiten möchten.
+                    BelegDepot scannt Belege und Quittungen, erkennt Text per OCR, ordnet Unterlagen in Kategorien
+                    und bereitet strukturierte Exporte für Steuerberater oder die Elster-Vorbereitung vor —
+                    offline-first, sicher auf dem Gerät.
                 </p>
                 <div class="cta-row">
-                    <a class="btn btn-primary" href="#features">Features ansehen</a>
-                    <a class="btn btn-secondary" href="https://github.com/GlassyDev-home" target="_blank" rel="noopener">GitHub</a>
+                    <a class="btn btn-primary" href="#features">Kernfunktionen</a>
+                    <a class="btn btn-secondary" href="#design">Design</a>
                 </div>
             </div>
 
             <aside class="hero-card" aria-label="App-Überblick">
                 <div class="app-icon-row">
-                    <img src="Finanzamt.png" alt="Finanzamt App Icon" class="app-icon" width="76" height="76">
+                    <img src="Finanzamt.png" alt="BelegDepot App Icon" class="app-icon" width="76" height="76">
                     <div>
-                        <h2>Meine Steuererklärung</h2>
-                        <p>Version für iOS &amp; macOS</p>
+                        <h2>BelegDepot</h2>
+                        <p>Native iOS · Liquid Glass UI</p>
                     </div>
                 </div>
-                <div class="tabs-preview" aria-hidden="true">
-                    <div class="tab-pill">Dashboard</div>
-                    <div class="tab-pill active">Geschäftlich</div>
-                    <div class="tab-pill">Privat</div>
-                    <div class="tab-pill">Fahrtbuch</div>
+                <div class="category-pills" aria-hidden="true">
+                    <span class="pill active">Geschäftlich</span>
+                    <span class="pill">Privat</span>
+                    <span class="pill">Fahrtbuch</span>
                 </div>
                 <div class="stat-grid">
                     <div class="stat">
-                        <div class="label">Belege</div>
-                        <div class="value">Scan &amp; Import</div>
+                        <div class="label">Scanner</div>
+                        <div class="value">VisionKit</div>
+                    </div>
+                    <div class="stat">
+                        <div class="label">OCR</div>
+                        <div class="value">Vision Framework</div>
+                    </div>
+                    <div class="stat">
+                        <div class="label">Speicher</div>
+                        <div class="value">SwiftData</div>
                     </div>
                     <div class="stat">
                         <div class="label">Export</div>
-                        <div class="value">PDF · CSV · NAS</div>
-                    </div>
-                    <div class="stat">
-                        <div class="label">Fahrtbuch</div>
-                        <div class="value">Apple Karten</div>
-                    </div>
-                    <div class="stat">
-                        <div class="label">Steuerjahr</div>
-                        <div class="value">2025 / 2026</div>
+                        <div class="value">PDF · CSV</div>
                     </div>
                 </div>
             </aside>
         </header>
 
         <section id="features">
-            <h2>Funktionen</h2>
-            <p class="section-lead">Vier Bereiche, ein Ziel: Steuerunterlagen sauber dokumentieren und jederzeit exportierbar halten.</p>
+            <h2>Kernfunktionen</h2>
+            <p class="section-lead">Vom Scan bis zum Export — vier Bausteine für eine saubere Steuerdokumentation.</p>
 
             <div class="feature-grid">
                 <article class="feature">
-                    <div class="feature-icon">📈</div>
-                    <h3>Dashboard</h3>
-                    <p>Jahresfilter, Kennzahlen auf einen Blick und Umschaltung zwischen Geschäftlich und Privat. Steuergesetze lassen sich pro Jahr aktualisieren.</p>
+                    <div class="feature-icon">📷</div>
+                    <h3>Dokumenten-Scanner</h3>
+                    <p>VisionKit erkennt Dokumentränder, schneidet automatisch zu und liefert saubere, scanbare Bilder — direkt in der App.</p>
                 </article>
                 <article class="feature">
-                    <div class="feature-icon">💼</div>
-                    <h3>Geschäftlich</h3>
-                    <p>Einnahmen und Betriebsausgaben mit Belegnachweis. App-Store-CSV, Financial Report und Bank-Import. Kleinunternehmerregelung (§ 19 UStG) optional.</p>
+                    <div class="feature-icon">🔍</div>
+                    <h3>OCR-Texterkennung</h3>
+                    <p>Apple Vision extrahiert Beträge, Datum, Händlernamen und Steuersätze (19&nbsp;% / 7&nbsp;%) aus Belegen — weniger Tipparbeit.</p>
                 </article>
                 <article class="feature cyan">
-                    <div class="feature-icon">👤</div>
-                    <h3>Privat</h3>
-                    <p>Belege in eigenen Ordnern — z. B. Ärzte, Vermietung oder eigene Kategorien. Scannen, importieren oder manuell mit Betrag erfassen.</p>
+                    <div class="feature-icon">🗂️</div>
+                    <h3>SwiftData-Archiv</h3>
+                    <p>Metadaten, Kategorien und Verknüpfungen zu lokal gecachten Dateien — offline-first und strukturiert für Geschäftlich, Privat und Fahrtbuch.</p>
                 </article>
                 <article class="feature cyan">
-                    <div class="feature-icon">🚗</div>
-                    <h3>Fahrtbuch</h3>
-                    <p>Fahrten mit Kilometerpauschale je Steuerjahr. Routenplanung über Apple Karten, Dienstreise, Pendeln, Arztfahrt und private Schulung.</p>
-                </article>
-                <article class="feature">
-                    <div class="feature-icon">📄</div>
-                    <h3>Finanzreport</h3>
-                    <p>EÜR-Vorbereitung als PDF und CSV — inklusive Fahrtbuch und Belegen. Besitzer- oder Firmenname aus den Einstellungen im Export-Kopf.</p>
-                </article>
-                <article class="feature">
-                    <div class="feature-icon">☁️</div>
-                    <h3>NAS &amp; Backup</h3>
-                    <p>Reports und Belege direkt auf Synology &amp; Co. hochladen. Vollständiges Backup als ZIP zum Wiederherstellen auf neuen Geräten.</p>
+                    <div class="feature-icon">📤</div>
+                    <h3>Export-Service</h3>
+                    <p>PDF-Bundles mit Beleganhängen plus CSV-Index — optimiert für Steuerberater und die Vorbereitung zur Abgabe ans Finanzamt.</p>
                 </article>
             </div>
         </section>
 
         <section id="workflow">
-            <h2>So funktioniert's</h2>
-            <p class="section-lead">Vom Belegscan bis zum Export — in wenigen Schritten zur Steuerunterlage.</p>
+            <h2>Workflow</h2>
+            <p class="section-lead">Minimaler Aufwand, maximale Ordnung — so läuft es in BelegDepot.</p>
 
             <ol class="flow-list">
                 <li>
                     <span class="flow-num">1</span>
                     <div>
-                        <strong>Erfassen</strong>
-                        <span>Belege scannen oder importieren, Buchungen anlegen, Fahrten im Fahrtbuch dokumentieren.</span>
+                        <strong>Scannen</strong>
+                        <span>Beleg mit dem Dokumentenscanner erfassen — Kantenerkennung und Auto-Zuschnitt inklusive.</span>
                     </div>
                 </li>
                 <li>
                     <span class="flow-num">2</span>
                     <div>
-                        <strong>Sortieren</strong>
-                        <span>Geschäftliche Ausgaben kategorisieren, private Belege in Ordner ablegen, Fahrten nach Typ zuordnen.</span>
+                        <strong>Erkennen</strong>
+                        <span>OCR liest Betrag, MwSt., Datum und Händler aus — Felder werden automatisch vorgeschlagen.</span>
                     </div>
                 </li>
                 <li>
                     <span class="flow-num">3</span>
                     <div>
-                        <strong>Prüfen</strong>
-                        <span>Dashboard und Finanzreport zeigen Summen, fehlerhafte Datumsangaben und fehlende Beträge.</span>
+                        <strong>Organisieren</strong>
+                        <span>Kategorie wählen: Geschäftlich, Privat oder Fahrtbuch. Alles bleibt lokal in SwiftData gespeichert.</span>
                     </div>
                 </li>
                 <li>
                     <span class="flow-num">4</span>
                     <div>
                         <strong>Exportieren</strong>
-                        <span>Bereich wählen (Geschäftlich, Privat oder Beides) — lokal teilen oder ins NAS kopieren.</span>
+                        <span>Strukturierte PDF-Pakete und CSV-Listen für Steuerberater oder die eigene Finanzamt-Vorbereitung.</span>
                     </div>
                 </li>
             </ol>
         </section>
 
+        <section id="design">
+            <h2>Design</h2>
+            <p class="section-lead">Chromated Liquid Glass — premium, minimalistisch, 100&nbsp;% Apple-native Ästhetik.</p>
+
+            <div class="design-card">
+                <div class="design-row">
+                    <span>Hintergrund</span>
+                    <span><span class="swatch" style="background:#000000"></span>OLED True Black</span>
+                </div>
+                <div class="design-row">
+                    <span>Komponenten</span>
+                    <span>Liquid Glass · Blur · 8&nbsp;% Border</span>
+                </div>
+                <div class="design-row">
+                    <span>Ecken</span>
+                    <span>18 – 28&nbsp;pt Squircle</span>
+                </div>
+                <div class="design-row">
+                    <span>Typografie</span>
+                    <span>SF Pro · semantisches Spacing</span>
+                </div>
+                <div class="design-row">
+                    <span>Plattform</span>
+                    <span>iOS-first · skalierbar für macOS</span>
+                </div>
+            </div>
+        </section>
+
         <section id="tech">
             <h2>Technologie</h2>
-            <p class="section-lead">Native Apple-Plattform — performant, offline-fähig, datenschutzfreundlich auf dem Gerät.</p>
+            <p class="section-lead">Native Apple-Frameworks — keine unnötigen Abhängigkeiten, maximale Performance und Datenschutz.</p>
             <div class="tech-row">
-                <span class="tech-chip">Swift 5</span>
+                <span class="tech-chip">Swift 6</span>
                 <span class="tech-chip">SwiftUI</span>
                 <span class="tech-chip">SwiftData</span>
-                <span class="tech-chip">Vision / OCR</span>
+                <span class="tech-chip">VisionKit</span>
+                <span class="tech-chip">Vision OCR</span>
                 <span class="tech-chip">PDFKit</span>
-                <span class="tech-chip">MapKit</span>
-                <span class="tech-chip">WebDAV / SMB / FTP</span>
-                <span class="tech-chip">iOS &amp; macOS</span>
+                <span class="tech-chip">Offline-first</span>
             </div>
         </section>
 
         <footer>
-            <p>Entwickelt von <a href="https://github.com/GlassyDev-home" target="_blank" rel="noopener">GlassyDev</a> · Finanzamt · Native SwiftUI App</p>
-            <p style="margin-top: 8px; font-size: 0.8rem;">Keine Steuerberatung — die App dient der Dokumentation und Export-Vorbereitung.</p>
+            <p>Entwickelt von <a href="https://github.com/GlassyDev-home" target="_blank" rel="noopener">GlassyDev</a> · <a href="https://glassydev-home.github.io/portfolio/">Portfolio</a></p>
+            <p style="margin-top: 8px; font-size: 0.8rem;">Keine Steuerberatung — BelegDepot dient der Dokumentation und Export-Vorbereitung.</p>
         </footer>
     </div>
 </body>
