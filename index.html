@@ -450,6 +450,109 @@
         }
 
         footer a:hover { text-decoration: underline; }
+
+        /* Screenshots */
+        .theme-toggle {
+            display: inline-flex;
+            gap: 4px;
+            padding: 4px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            margin-bottom: 28px;
+        }
+
+        .theme-toggle button {
+            border: none;
+            background: transparent;
+            color: var(--muted);
+            font-size: 0.82rem;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 9px;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .theme-toggle button.active {
+            background: var(--green-dim);
+            color: var(--green);
+            border: 1px solid var(--green-border);
+        }
+
+        .screenshot-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 24px;
+        }
+
+        .screenshot-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .phone-frame {
+            width: 100%;
+            max-width: 260px;
+            aspect-ratio: 9 / 19.5;
+            border-radius: 32px;
+            padding: 10px;
+            background: linear-gradient(145deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04));
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        .phone-frame::before {
+            content: "";
+            position: absolute;
+            top: 14px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 72px;
+            height: 22px;
+            border-radius: 12px;
+            background: #000;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .phone-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+            border-radius: 24px;
+            display: block;
+            background: #111;
+        }
+
+        .screenshot-card figcaption {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--muted-2);
+            text-align: center;
+        }
+
+        .screenshot-hero {
+            margin-bottom: 40px;
+        }
+
+        .screenshot-hero .phone-frame {
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        .screenshots-header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 8px;
+        }
     </style>
 </head>
 <body>
@@ -476,8 +579,8 @@
                     offline-first, sicher auf dem Gerät.
                 </p>
                 <div class="cta-row">
-                    <a class="btn btn-primary" href="#features">Kernfunktionen</a>
-                    <a class="btn btn-secondary" href="#design">Design</a>
+                    <a class="btn btn-primary" href="#screenshots">Screenshots</a>
+                    <a class="btn btn-secondary" href="#features">Kernfunktionen</a>
                 </div>
             </div>
 
@@ -514,6 +617,98 @@
                 </div>
             </aside>
         </header>
+
+        <section id="screenshots">
+            <div class="screenshots-header">
+                <div>
+                    <h2>App im Überblick</h2>
+                    <p class="section-lead" style="margin-bottom: 0;">Echte Screenshots aus BelegDepot — Dark Mode und Hell-Modus.</p>
+                </div>
+                <div class="theme-toggle" role="group" aria-label="Darstellung wählen">
+                    <button type="button" class="active" data-theme="dark" aria-pressed="true">Dark</button>
+                    <button type="button" data-theme="hell" aria-pressed="false">Hell</button>
+                </div>
+            </div>
+
+            <div class="screenshot-hero">
+                <figure class="screenshot-card">
+                    <div class="phone-frame">
+                        <img
+                            src="hauptseite_dark.png"
+                            data-dark="hauptseite_dark.png"
+                            data-hell="hauptseite_hell.png"
+                            alt="BelegDepot Dashboard mit Jahresübersicht"
+                            width="300"
+                            height="650"
+                            loading="eager"
+                        >
+                    </div>
+                    <figcaption>Dashboard · Jahresübersicht</figcaption>
+                </figure>
+            </div>
+
+            <div class="screenshot-grid">
+                <figure class="screenshot-card">
+                    <div class="phone-frame">
+                        <img
+                            src="menü_dark.png"
+                            data-dark="menü_dark.png"
+                            data-hell="menü_hell.png"
+                            alt="Hauptmenü mit Geschäftlich, Privat und Fahrtbuch"
+                            width="260"
+                            height="563"
+                            loading="lazy"
+                        >
+                    </div>
+                    <figcaption>Navigation</figcaption>
+                </figure>
+
+                <figure class="screenshot-card">
+                    <div class="phone-frame">
+                        <img
+                            src="Geschäftlich_dark.png"
+                            data-dark="Geschäftlich_dark.png"
+                            data-hell="Geschäftlich_hell.png"
+                            alt="Geschäftliche Buchungen und Ausgaben"
+                            width="260"
+                            height="563"
+                            loading="lazy"
+                        >
+                    </div>
+                    <figcaption>Geschäftlich</figcaption>
+                </figure>
+
+                <figure class="screenshot-card">
+                    <div class="phone-frame">
+                        <img
+                            src="Privat_dark.png"
+                            data-dark="Privat_dark.png"
+                            data-hell="Privat_hell.png"
+                            alt="Private Belege in Kategorien"
+                            width="260"
+                            height="563"
+                            loading="lazy"
+                        >
+                    </div>
+                    <figcaption>Privat</figcaption>
+                </figure>
+
+                <figure class="screenshot-card">
+                    <div class="phone-frame">
+                        <img
+                            src="Fahrtbuch_dark.png"
+                            data-dark="Fahrtbuch_dark.png"
+                            data-hell="Fahrtbuch_hell.png"
+                            alt="Fahrtbuch mit Kilometerpauschale"
+                            width="260"
+                            height="563"
+                            loading="lazy"
+                        >
+                    </div>
+                    <figcaption>Fahrtbuch</figcaption>
+                </figure>
+            </div>
+        </section>
 
         <section id="features">
             <h2>Kernfunktionen</h2>
@@ -626,5 +821,29 @@
             <p style="margin-top: 8px; font-size: 0.8rem;">Keine Steuerberatung — BelegDepot dient der Dokumentation und Export-Vorbereitung.</p>
         </footer>
     </div>
+
+    <script>
+        (function () {
+            var buttons = document.querySelectorAll('.theme-toggle button');
+            var images = document.querySelectorAll('#screenshots img[data-dark][data-hell]');
+
+            function setTheme(theme) {
+                buttons.forEach(function (btn) {
+                    var active = btn.dataset.theme === theme;
+                    btn.classList.toggle('active', active);
+                    btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+                });
+                images.forEach(function (img) {
+                    img.src = theme === 'hell' ? img.dataset.hell : img.dataset.dark;
+                });
+            }
+
+            buttons.forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    setTheme(btn.dataset.theme);
+                });
+            });
+        })();
+    </script>
 </body>
 </html>
