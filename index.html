@@ -85,7 +85,7 @@
         .nav-tags {
             display: flex;
             gap: 8px;
-            flex-wrap: wrap;
+            margin-wrap: wrap;
         }
 
         .tag {
@@ -651,9 +651,9 @@
                 <figure class="screenshot-card">
                     <div class="phone-frame">
                         <img
-                            src="menü_dark.png"
-                            data-dark="menü_dark.png"
-                            data-hell="menü_hell.png"
+                            src="navigation.png"
+                            data-dark="navigation.png"
+                            data-hell="navigation_hell.png"
                             alt="Hauptmenü mit Geschäftlich, Privat und Fahrtbuch"
                             width="260"
                             height="563"
@@ -666,9 +666,9 @@
                 <figure class="screenshot-card">
                     <div class="phone-frame">
                         <img
-                            src="Geschäftlich_dark.png"
-                            data-dark="Geschäftlich_dark.png"
-                            data-hell="Geschäftlich_hell.png"
+                            src="geschaeftlich.png"
+                            data-dark="geschaeftlich.png"
+                            data-hell="geschaeftlich_hell.png"
                             alt="Geschäftliche Buchungen und Ausgaben"
                             width="260"
                             height="563"
@@ -681,9 +681,9 @@
                 <figure class="screenshot-card">
                     <div class="phone-frame">
                         <img
-                            src="Privat_dark.png"
-                            data-dark="Privat_dark.png"
-                            data-hell="Privat_hell.png"
+                            src="privat.png"
+                            data-dark="privat.png"
+                            data-hell="privat_hell.png"
                             alt="Private Belege in Kategorien"
                             width="260"
                             height="563"
@@ -696,9 +696,9 @@
                 <figure class="screenshot-card">
                     <div class="phone-frame">
                         <img
-                            src="Fahrtbuch_dark.png"
-                            data-dark="Fahrtbuch_dark.png"
-                            data-hell="Fahrtbuch_hell.png"
+                            src="fahrtbuch.png"
+                            data-dark="fahrtbuch.png"
+                            data-hell="fahrtbuch_hell.png"
                             alt="Fahrtbuch mit Kilometerpauschale"
                             width="260"
                             height="563"
@@ -824,17 +824,25 @@
 
     <script>
         (function () {
-            var buttons = document.querySelectorAll('.theme-toggle button');
-            var images = document.querySelectorAll('#screenshots img[data-dark][data-hell]');
+            const buttons = document.querySelectorAll('.theme-toggle button');
+            const images = document.querySelectorAll('#screenshots img[data-dark][data-hell]');
+
+            // HELLE BILDER IM HINTERGRUND VORLADEN (Verhindert jegliches Flackern beim Umschalten)
+            window.addEventListener('DOMContentLoaded', function() {
+                images.forEach(function (img) {
+                    const preloadImg = new Image();
+                    preloadImg.src = img.getAttribute('data-hell');
+                });
+            });
 
             function setTheme(theme) {
                 buttons.forEach(function (btn) {
-                    var active = btn.dataset.theme === theme;
+                    const active = btn.dataset.theme === theme;
                     btn.classList.toggle('active', active);
                     btn.setAttribute('aria-pressed', active ? 'true' : 'false');
                 });
                 images.forEach(function (img) {
-                    img.src = theme === 'hell' ? img.dataset.hell : img.dataset.dark;
+                    img.src = theme === 'hell' ? img.getAttribute('data-hell') : img.getAttribute('data-dark');
                 });
             }
 
