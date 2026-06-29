@@ -3,8 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dima | App Portfolio</title>
+    <meta name="description" content="Finanzamt – Native iOS &amp; macOS App zur EÜR-Vorbereitung, Belegverwaltung, Fahrtbuch und Steuerexport.">
+    <meta name="theme-color" content="#000000">
+    <title>Finanzamt | EÜR-Vorbereitung · Belege · Fahrtbuch</title>
     <style>
+        :root {
+            --bg: #000000;
+            --text: #ffffff;
+            --muted: #86868b;
+            --muted-2: #aeaeaf;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --green: #59ff8c;
+            --green-dim: rgba(89, 255, 140, 0.12);
+            --green-border: rgba(89, 255, 140, 0.28);
+            --cyan: #5ac8fa;
+            --radius: 28px;
+            --radius-sm: 16px;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -13,110 +30,67 @@
         }
 
         body {
-            background-color: #000000;
-            color: #ffffff;
+            background: var(--bg);
+            color: var(--text);
             min-height: 100vh;
-            padding: 60px 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: 60px;
-            max-width: 600px;
-        }
-
-        header h1 {
-            font-size: 2.8rem;
-            font-weight: 800;
-            letter-spacing: -0.05em;
-            margin-bottom: 12px;
-            background: linear-gradient(135deg, #ffffff 30%, #a1a1a1 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        header p {
-            color: #86868b;
-            font-size: 1.15rem;
-            font-weight: 400;
-        }
-
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            max-width: 1100px;
-            width: 100%;
-        }
-
-        .app-card {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 28px;
-            padding: 35px;
-            display: flex;
-            flex-direction: column;
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s, box-shadow 0.4s;
-            position: relative;
-        }
-
-        .app-card:hover {
-            transform: translateY(-6px);
-            border-color: rgba(0, 122, 255, 0.4);
-            box-shadow: 0 15px 40px rgba(0, 122, 255, 0.15);
-        }
-
-        .app-icon {
-            width: 76px;
-            height: 76px;
-            border-radius: 18px;
-            margin-bottom: 24px;
-            background: linear-gradient(135deg, #1c1c1e, #2c2c2e);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.2rem;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            object-fit: cover;
-        }
-
-        .app-card h2 {
-            font-size: 1.6rem;
-            margin-bottom: 8px;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-        }
-
-        .app-card p {
-            color: #aeaeaf;
-            font-size: 0.98rem;
             line-height: 1.55;
-            margin-bottom: 30px;
-            flex-grow: 1;
+            overflow-x: hidden;
         }
 
-        .tech-tags {
+        .glow {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            background:
+                radial-gradient(ellipse 60% 45% at 15% 0%, rgba(89, 255, 140, 0.14), transparent 55%),
+                radial-gradient(ellipse 50% 40% at 85% 10%, rgba(90, 200, 250, 0.1), transparent 50%),
+                radial-gradient(ellipse 40% 30% at 50% 100%, rgba(89, 255, 140, 0.06), transparent 60%);
+        }
+
+        .wrap {
+            position: relative;
+            z-index: 1;
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 32px 20px 80px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 48px;
+            flex-wrap: wrap;
+        }
+
+        .back-link {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.92rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover { color: var(--text); }
+
+        .nav-tags {
             display: flex;
             gap: 8px;
-            margin-bottom: 16px;
             flex-wrap: wrap;
         }
 
         .tag {
-            background: rgba(0, 122, 255, 0.1);
-            border: 1px solid rgba(0, 122, 255, 0.15);
+            background: var(--green-dim);
+            border: 1px solid var(--green-border);
             padding: 4px 12px;
             border-radius: 8px;
             font-size: 0.78rem;
-            color: #2f95ff;
+            color: var(--green);
             font-weight: 600;
-            letter-spacing: 0.02em;
         }
 
         .tag.platform {
@@ -125,56 +99,469 @@
             color: #e5e5ea;
         }
 
-        .action-btn {
-            background-color: #ffffff;
-            color: #000000;
-            text-decoration: none;
-            padding: 14px 28px;
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 36px;
+            margin-bottom: 56px;
+        }
+
+        @media (min-width: 860px) {
+            .hero {
+                grid-template-columns: 1.1fr 0.9fr;
+                align-items: center;
+            }
+        }
+
+        .hero-copy h1 {
+            font-size: clamp(2.2rem, 5vw, 3.2rem);
+            font-weight: 800;
+            letter-spacing: -0.05em;
+            line-height: 1.05;
+            margin-bottom: 14px;
+            background: linear-gradient(135deg, #ffffff 20%, var(--green) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-copy .subtitle {
+            font-size: 1.15rem;
+            color: var(--muted-2);
+            margin-bottom: 24px;
+            max-width: 540px;
+        }
+
+        .hero-copy .intro {
+            color: var(--muted);
+            font-size: 1rem;
+            margin-bottom: 28px;
+            max-width: 560px;
+        }
+
+        .cta-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 24px;
             border-radius: 14px;
             font-weight: 600;
             font-size: 0.95rem;
+            text-decoration: none;
+            transition: transform 0.1s, background-color 0.2s, border-color 0.2s;
+        }
+
+        .btn:active { transform: scale(0.98); }
+
+        .btn-primary {
+            background: var(--green);
+            color: #041008;
+        }
+
+        .btn-primary:hover { background: #7dffaa; }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--text);
+            border: 1px solid var(--glass-border);
+        }
+
+        .btn-secondary:hover { border-color: var(--green-border); }
+
+        .hero-card {
+            background: var(--glass);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius);
+            padding: 28px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+        }
+
+        .app-icon-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 22px;
+        }
+
+        .app-icon {
+            width: 76px;
+            height: 76px;
+            border-radius: 18px;
+            background: linear-gradient(145deg, #0d2818, #1a3d28);
+            border: 1px solid var(--green-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+        }
+
+        .app-icon-row h2 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .app-icon-row p {
+            color: var(--muted);
+            font-size: 0.88rem;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .stat {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: var(--radius-sm);
+            padding: 14px;
+        }
+
+        .stat .label {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--muted);
+            margin-bottom: 4px;
+        }
+
+        .stat .value {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--green);
+        }
+
+        section {
+            margin-bottom: 56px;
+        }
+
+        section h2 {
+            font-size: 1.55rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 8px;
+        }
+
+        section .section-lead {
+            color: var(--muted);
+            margin-bottom: 24px;
+            max-width: 640px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .feature {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius);
+            padding: 24px;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+
+        .feature:hover {
+            border-color: var(--green-border);
+            transform: translateY(-4px);
+        }
+
+        .feature-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            margin-bottom: 14px;
+            background: var(--green-dim);
+            border: 1px solid var(--green-border);
+        }
+
+        .feature.cyan .feature-icon {
+            background: rgba(90, 200, 250, 0.12);
+            border-color: rgba(90, 200, 250, 0.25);
+        }
+
+        .feature h3 {
+            font-size: 1.05rem;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .feature p {
+            color: var(--muted-2);
+            font-size: 0.92rem;
+        }
+
+        .tabs-preview {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .tab-pill {
             text-align: center;
-            transition: background-color 0.2s, transform 0.1s;
+            padding: 10px 6px;
+            border-radius: 12px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--muted);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
         }
 
-        .action-btn:hover {
-            background-color: #e5e5ea;
+        .tab-pill.active {
+            color: var(--green);
+            background: var(--green-dim);
+            border-color: var(--green-border);
         }
 
-        .action-btn:active {
-            transform: scale(0.98);
+        .flow-list {
+            list-style: none;
+            display: grid;
+            gap: 12px;
         }
+
+        .flow-list li {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-sm);
+            padding: 16px 18px;
+        }
+
+        .flow-num {
+            flex-shrink: 0;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--green-dim);
+            border: 1px solid var(--green-border);
+            color: var(--green);
+            font-size: 0.82rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .flow-list strong {
+            display: block;
+            margin-bottom: 4px;
+            font-size: 0.95rem;
+        }
+
+        .flow-list span {
+            color: var(--muted-2);
+            font-size: 0.88rem;
+        }
+
+        .tech-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tech-chip {
+            padding: 8px 14px;
+            border-radius: 999px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: #e5e5ea;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        footer {
+            text-align: center;
+            padding-top: 32px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            color: var(--muted);
+            font-size: 0.88rem;
+        }
+
+        footer a {
+            color: var(--green);
+            text-decoration: none;
+        }
+
+        footer a:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
+    <div class="glow" aria-hidden="true"></div>
 
-    <header>
-        <h1>App Showcase</h1>
-        <p>Native Anwendungen entwickelt mit Swift & SwiftUI.</p>
-    </header>
-
-    <main class="portfolio-grid">
-
-        <!-- 1. APP: FINANZAMT VORBEREITUNG -->
-        <div class="app-card">
-            <!-- Nutzt dein hochgeladenes Bild aus image_9597b8.png -->
-            <img src="Finanzamt.png" alt="Finanzamt App Icon" class="app-icon">
-            <div class="tech-tags">
-                <span class="tag">MacOS</span>
+    <div class="wrap">
+        <nav>
+            <a class="back-link" href="https://glassydev-home.github.io/portfolio/">← Portfolio</a>
+            <div class="nav-tags">
                 <span class="tag platform">iOS</span>
+                <span class="tag platform">macOS</span>
+                <span class="tag">SwiftUI</span>
+                <span class="tag">SwiftData</span>
             </div>
-            <h2>Meine Steuererklärung</h2>
-            <p>Eine intelligente iOS-Anwendung zur Digitalisierung und Organisation von Steuerbelegen. Mit automatischer Texterkennung (OCR) und direkter Kategorisierung, um die jährliche Steuererklärung stressfrei vorzubereiten.</p>
-            <a href="#" class="action-btn">Projekt ansehen</a>
-        </div>
+        </nav>
 
-        <!-- 2. APP: RADIO APP -->
-        
+        <header class="hero">
+            <div class="hero-copy">
+                <h1>Finanzamt</h1>
+                <p class="subtitle">EÜR-Vorbereitung, Belege und Fahrtbuch — native App für Geschäftliches und Privates.</p>
+                <p class="intro">
+                    Finanzamt hilft dir, Einnahmen, Ausgaben, Belege und Fahrten für die Steuer zu erfassen
+                    und als PDF oder CSV zu exportieren. Ideal für App-Store-Entwickler, Freelancer und alle,
+                    die ihre Unterlagen strukturiert fürs Finanzamt vorbereiten möchten.
+                </p>
+                <div class="cta-row">
+                    <a class="btn btn-primary" href="https://glassydev-home.github.io/portfolio/">Zum Portfolio</a>
+                    <a class="btn btn-secondary" href="#features">Features ansehen</a>
+                </div>
+            </div>
 
-        <!-- 3. APP: ICON RESIZER -->
-        
+            <aside class="hero-card" aria-label="App-Überblick">
+                <div class="app-icon-row">
+                    <div class="app-icon" aria-hidden="true">📊</div>
+                    <div>
+                        <h2>Meine Steuererklärung</h2>
+                        <p>Version für iOS &amp; macOS</p>
+                    </div>
+                </div>
+                <div class="tabs-preview" aria-hidden="true">
+                    <div class="tab-pill">Dashboard</div>
+                    <div class="tab-pill active">Geschäftlich</div>
+                    <div class="tab-pill">Privat</div>
+                    <div class="tab-pill">Fahrtbuch</div>
+                </div>
+                <div class="stat-grid">
+                    <div class="stat">
+                        <div class="label">Belege</div>
+                        <div class="value">Scan &amp; Import</div>
+                    </div>
+                    <div class="stat">
+                        <div class="label">Export</div>
+                        <div class="value">PDF · CSV · NAS</div>
+                    </div>
+                    <div class="stat">
+                        <div class="label">Fahrtbuch</div>
+                        <div class="value">Apple Karten</div>
+                    </div>
+                    <div class="stat">
+                        <div class="label">Steuerjahr</div>
+                        <div class="value">2025 / 2026</div>
+                    </div>
+                </div>
+            </aside>
+        </header>
 
-    </main>
+        <section id="features">
+            <h2>Funktionen</h2>
+            <p class="section-lead">Vier Bereiche, ein Ziel: Steuerunterlagen sauber dokumentieren und jederzeit exportierbar halten.</p>
 
+            <div class="feature-grid">
+                <article class="feature">
+                    <div class="feature-icon">📈</div>
+                    <h3>Dashboard</h3>
+                    <p>Jahresfilter, Kennzahlen auf einen Blick und Umschaltung zwischen Geschäftlich und Privat. Steuergesetze lassen sich pro Jahr aktualisieren.</p>
+                </article>
+                <article class="feature">
+                    <div class="feature-icon">💼</div>
+                    <h3>Geschäftlich</h3>
+                    <p>Einnahmen und Betriebsausgaben mit Belegnachweis. App-Store-CSV, Financial Report und Bank-Import. Kleinunternehmerregelung (§ 19 UStG) optional.</p>
+                </article>
+                <article class="feature cyan">
+                    <div class="feature-icon">👤</div>
+                    <h3>Privat</h3>
+                    <p>Belege in eigenen Ordnern — z. B. Ärzte, Vermietung oder eigene Kategorien. Scannen, importieren oder manuell mit Betrag erfassen.</p>
+                </article>
+                <article class="feature cyan">
+                    <div class="feature-icon">🚗</div>
+                    <h3>Fahrtbuch</h3>
+                    <p>Fahrten mit Kilometerpauschale je Steuerjahr. Routenplanung über Apple Karten, Dienstreise, Pendeln, Arztfahrt und private Schulung.</p>
+                </article>
+                <article class="feature">
+                    <div class="feature-icon">📄</div>
+                    <h3>Finanzreport</h3>
+                    <p>EÜR-Vorbereitung als PDF und CSV — inklusive Fahrtbuch und Belegen. Besitzer- oder Firmenname aus den Einstellungen im Export-Kopf.</p>
+                </article>
+                <article class="feature">
+                    <div class="feature-icon">☁️</div>
+                    <h3>NAS &amp; Backup</h3>
+                    <p>Reports und Belege direkt auf Synology &amp; Co. hochladen. Vollständiges Backup als ZIP zum Wiederherstellen auf neuen Geräten.</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="workflow">
+            <h2>So funktioniert's</h2>
+            <p class="section-lead">Vom Belegscan bis zum Export — in wenigen Schritten zur Steuerunterlage.</p>
+
+            <ol class="flow-list">
+                <li>
+                    <span class="flow-num">1</span>
+                    <div>
+                        <strong>Erfassen</strong>
+                        <span>Belege scannen oder importieren, Buchungen anlegen, Fahrten im Fahrtbuch dokumentieren.</span>
+                    </div>
+                </li>
+                <li>
+                    <span class="flow-num">2</span>
+                    <div>
+                        <strong>Sortieren</strong>
+                        <span>Geschäftliche Ausgaben kategorisieren, private Belege in Ordner ablegen, Fahrten nach Typ zuordnen.</span>
+                    </div>
+                </li>
+                <li>
+                    <span class="flow-num">3</span>
+                    <div>
+                        <strong>Prüfen</strong>
+                        <span>Dashboard und Finanzreport zeigen Summen, fehlerhafte Datumsangaben und fehlende Beträge.</span>
+                    </div>
+                </li>
+                <li>
+                    <span class="flow-num">4</span>
+                    <div>
+                        <strong>Exportieren</strong>
+                        <span>Bereich wählen (Geschäftlich, Privat oder Beides) — lokal teilen oder ins NAS kopieren.</span>
+                    </div>
+                </li>
+            </ol>
+        </section>
+
+        <section id="tech">
+            <h2>Technologie</h2>
+            <p class="section-lead">Native Apple-Plattform — performant, offline-fähig, datenschutzfreundlich auf dem Gerät.</p>
+            <div class="tech-row">
+                <span class="tech-chip">Swift 5</span>
+                <span class="tech-chip">SwiftUI</span>
+                <span class="tech-chip">SwiftData</span>
+                <span class="tech-chip">Vision / OCR</span>
+                <span class="tech-chip">PDFKit</span>
+                <span class="tech-chip">MapKit</span>
+                <span class="tech-chip">WebDAV / SMB / FTP</span>
+                <span class="tech-chip">iOS &amp; macOS</span>
+            </div>
+        </section>
+
+        <footer>
+            <p>Entwickelt von <a href="https://glassydev-home.github.io/portfolio/">Dima</a> · Finanzamt · Native SwiftUI App</p>
+            <p style="margin-top: 8px; font-size: 0.8rem;">Keine Steuerberatung — die App dient der Dokumentation und Export-Vorbereitung.</p>
+        </footer>
+    </div>
 </body>
 </html>
